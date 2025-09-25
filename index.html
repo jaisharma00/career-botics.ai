@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Career Botics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Step 1: Student Details -->
+    <div id="studentDetails">
+      <h1>Welcome to CAREER BOTICS_AI</h1>
+      <h2>Enter Your Details</h2>
+      <input type="text" id="name" placeholder="Enter your name">
+      <input type="number" id="age" placeholder="Enter your age">
+      <input type="tel" id="phone" placeholder="Enter your phone number">
+      <button onclick="startTest()">Start Test</button>
+    </div>
+
+    <!-- Step 2: Aptitude Test -->
+    <div id="quizSection" style="display:none;">
+      <h2>Aptitude Test</h2>
+      <div id="questionContainer"></div>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+
+    <!-- Step 3: Result -->
+    <div id="resultSection" style="display:none;">
+      <h2>Your Career Counselling Result</h2>
+      <p id="resultText"></p>
+      <button onclick="startChat()">Talk to AI Counsellor</button>
+    </div>
+
+    <!-- Step 4: Chatbot -->
+    <div id="chatSection" style="display:none;">
+      <h2>AI Career Chatbot</h2>
+      <div id="chatWindow" class="chat"></div>
+      <input type="text" id="userInput" placeholder="Ask about careers...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+

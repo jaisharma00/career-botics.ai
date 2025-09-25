@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aptitude Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Aptitude Test</h2>
+    <form id="quizForm"></form>
+    <button onclick="submitQuiz()">Submit</button>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "Do you enjoy solving math problems?", type: "science" },
+      { q: "Are you interested in how businesses work?", type: "commerce" },
+      { q: "Do you like painting, writing, or creative arts?", type: "arts" },
+      { q: "Do you enjoy coding or working with technology?", type: "science" },
+      { q: "Would you like to manage money and investments?", type: "commerce" },
+      { q: "Do you enjoy public speaking and storytelling?", type: "arts" },
+      { q: "Do you like experimenting in labs or doing research?", type: "science" },
+      { q: "Do you enjoy analyzing financial data?", type: "commerce" },
+      { q: "Do you like photography, film, or music?", type: "arts" }
+    ];
+
+    // Pick random 5 questions
+    let selected = questions.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+    let quizForm = document.getElementById("quizForm");
+    selected.forEach((item, i) => {
+      quizForm.innerHTML += `
+        <p>Q${i+1}: ${item.q}</p>
+        <input type="radio" name="q${i}" value="${item.type}"> Yes
+        <input type="radio" name="q${i}" value="none"> No
+      `;
+    });
+
+    function submitQuiz() {
+      let form = document.forms["quizForm"];
+      let science=0, commerce=0, arts=0;
+
+      for (let i=0; i<selected.length; i++) {
+        let ans = document.querySelector(`input[name="q${i}"]:checked`);
+        if (ans) {
+          if (ans.value==="science") science++;
+          if (ans.value==="commerce") commerce++;
+          if (ans.value==="arts") arts++;
+        }
+      }
+
+      let stream = "";
+      let suggestion = "";
+
+      if (science >= commerce && science >= arts) {
+        stream = "Science";
+        suggestion = `
+          <h3>Your Strength: Science & Logic</h3>
+          <ul>
+            <li>Engineer ⚙️</li>
+            <li>Doctor 🩺</li>
+            <li>Software Developer 💻</li>
+            <li>Data Scientist 📊</li>
+          </ul>`;
+      } else if (commerce >= science && commerce >= arts) {
+        stream = "Commerce";
+        suggestion = `
+          <h3>Your Strength: Business & Finance</h3>
+          <ul>
+            <li>Accountant 💰</li>
+            <li>Economist 📈</li>
+            <li>Business Analyst 📊</li>
+            <li>Entrepreneur 🚀</li>
+          </ul>`;
+      } else {
+        stream = "Arts";
+        suggestion = `
+          <h3>Your Strength: Creativity & Expression</h3>
+          <ul>
+            <li>Graphic Designer 🎨</li>
+            <li>Writer ✍️</li>
+            <li>Psychologist 🧠</li>
+            <li>Content Creator 🎥</li>
+          </ul>`;
+      }
+
+      localStorage.setItem("stream", stream);
+      localStorage.setItem("careerSuggestion", suggestion);
+      window.location.href = "result.html";
+    }
+  </script>
+</body>
+</html>
+

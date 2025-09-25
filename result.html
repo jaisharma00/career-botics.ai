@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Career Result</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Career Suggestions for <span id="studentName"></span></h2>
+    <h3>Suggested Stream: <span id="stream"></span></h3>
+    <div id="careerResult"></div>
+
+    <hr>
+    <h2>Ask AI Career Chatbot</h2>
+    <div id="chatWindow" class="chat"></div>
+    <input type="text" id="userInput" placeholder="Ask about careers...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    document.getElementById("studentName").innerText = localStorage.getItem("studentName");
+    document.getElementById("stream").innerText = localStorage.getItem("stream");
+    document.getElementById("careerResult").innerHTML = localStorage.getItem("careerSuggestion");
+
+    // Dummy AI Chatbot (replace with OpenAI API backend later)
+    async function sendMessage() {
+      let input = document.getElementById("userInput").value;
+      if (input.trim()==="") return;
+
+      let chatWindow = document.getElementById("chatWindow");
+      chatWindow.innerHTML += `<p><b>You:</b> ${input}</p>`;
+
+      // Fake AI response
+      let reply = "I think " + localStorage.getItem("stream") + " is a good path for you! Explore the listed careers.";
+      chatWindow.innerHTML += `<p><b>AI:</b> ${reply}</p>`;
+      document.getElementById("userInput").value = "";
+    }
+  </script>
+</body>
+</html>
+
